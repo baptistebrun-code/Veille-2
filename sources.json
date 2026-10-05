@@ -1,0 +1,22 @@
+{
+  "fenetre_heures": 36,
+  "max_elements": 18,
+  "liste_de_suivi": [
+    "Denis Villeneuve",
+    "A24",
+    "Annie Leibovitz",
+    "Wes Anderson"
+  ],
+  "flux": [
+    {"nom": "Deadline", "url": "https://deadline.com/feed/", "categorie": "Cinéma et séries"},
+    {"nom": "Variety", "url": "https://variety.com/feed/", "categorie": "Cinéma et séries"},
+    {"nom": "IndieWire", "url": "https://www.indiewire.com/feed/", "categorie": "Cinéma et séries"},
+    {"nom": "The Hollywood Reporter", "url": "https://www.hollywoodreporter.com/feed/", "categorie": "Cinéma et séries"},
+    {"nom": "Filmmaker Magazine", "url": "https://filmmakermagazine.com/feed/", "categorie": "Cinéma et séries"},
+    {"nom": "No Film School", "url": "https://nofilmschool.com/rss.xml", "categorie": "Réalisation et production"},
+    {"nom": "Little White Lies", "url": "https://lwlies.com/feed/", "categorie": "Cinéma et séries"},
+    {"nom": "Booooooom", "url": "https://www.booooooom.com/feed/", "categorie": "Photographie et art"},
+    {"nom": "PetaPixel", "url": "https://petapixel.com/feed/", "categorie": "Photographie et art"},
+    {"nom": "Creative Boom", "url": "https://www.creativeboom.com/feed/", "categorie": "Publicité et design"}
+  ]
+}
