@@ -23,6 +23,7 @@ jobs:
           # none = gratuit sans IA (défaut) | gemini = gratuit avec résumés en français | claude = payant
           LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'none' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
