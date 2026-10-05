@@ -142,22 +142,36 @@ def _json_depuis_texte(texte: str) -> list[dict]:
 
 
 def appeler_gemini(consigne: str, candidats: list[dict]) -> list[dict]:
-    """Google Gemini via l'API REST (offre gratuite, pas de dépendance supplémentaire)."""
+    """Google Gemini via l'API REST (offre gratuite). Réessaie en cas de surcharge (503, 429)."""
+    import urllib.error
     import urllib.request
 
-    modele = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
-    url = (f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent"
-           f"?key={os.environ['GEMINI_API_KEY']}")
-    corps = {
+    principal = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+    modeles = [principal] + [m for m in ("gemini-3.1-flash-lite",) if m != principal]
+    corps = json.dumps({
         "systemInstruction": {"parts": [{"text": consigne}]},
         "contents": [{"role": "user", "parts": [{"text": json.dumps(candidats, ensure_ascii=False)}]}],
         "generationConfig": {"responseMimeType": "application/json", "temperature": 0.2},
-    }
-    req = urllib.request.Request(url, json.dumps(corps).encode(), {"Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        data = json.load(r)
-    return _json_depuis_texte(data["candidates"][0]["content"]["parts"][0]["text"])
+    }).encode()
 
+    derniere_erreur: Exception = RuntimeError("aucun modèle essayé")
+    for modele in modeles:
+        url = (f"https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent"
+               f"?key={os.environ['GEMINI_API_KEY']}")
+        for essai in range(4):
+            try:
+                req = urllib.request.Request(url, corps, {"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=120) as r:
+                    data = json.load(r)
+                return _json_depuis_texte(data["candidates"][0]["content"]["parts"][0]["text"])
+            except urllib.error.HTTPError as exc:
+                derniere_erreur = exc
+                print(f"[info] Gemini {modele} : HTTP {exc.code} (essai {essai + 1}/4)", file=sys.stderr)
+                if exc.code in (429, 500, 502, 503, 504):
+                    time.sleep(5 * 2 ** essai)  # 5 s, 10 s, 20 s, 40 s
+                else:
+                    break  # erreur définitive (404, 400, 403) : on passe au modèle suivant
+    raise derniere_erreur
 
 def appeler_claude(consigne: str, candidats: list[dict]) -> list[dict]:
     """Claude (payant). Nécessite `pip install anthropic` et ANTHROPIC_API_KEY."""
