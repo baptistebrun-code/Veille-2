@@ -1,0 +1,24 @@
+{
+  "fenetre_heures": 168,
+  "max_elements": 15,
+  "liste_de_suivi": [
+    "Hiro Murai",
+    "Somesuch",
+    "Partizan",
+    "Park Pictures"
+  ],
+  "flux": [
+    {"nom": "Adweek", "url": "https://www.adweek.com/feed/", "categorie": "Publicité"},
+    {"nom": "Campaign", "url": "https://www.campaignlive.co.uk/rss/news", "categorie": "Publicité"},
+    {"nom": "Creative Review", "url": "https://www.creativereview.co.uk/feed/", "categorie": "Publicité"},
+    {"nom": "Little Black Book", "url": "https://www.lbbonline.com/feed", "categorie": "Publicité"},
+    {"nom": "Ads of the World", "url": "https://www.adsoftheworld.com/feed", "categorie": "Publicité"},
+    {"nom": "Creative Boom", "url": "https://www.creativeboom.com/feed/", "categorie": "Publicité"},
+    {"nom": "Promonews", "url": "https://www.promonews.tv/feed", "categorie": "Clips et publicité"},
+    {"nom": "Stereogum", "url": "https://www.stereogum.com/feed/", "categorie": "Clips"},
+    {"nom": "Consequence", "url": "https://consequence.net/feed/", "categorie": "Clips"},
+    {"nom": "NME", "url": "https://www.nme.com/feed", "categorie": "Clips"},
+    {"nom": "Google Actualités : clips", "url": "https://news.google.com/rss/search?q=%22music+video%22+directed+by+when:7d&hl=en-US&gl=US&ceid=US:en", "categorie": "Clips"},
+    {"nom": "Google Actualités : publicité", "url": "https://news.google.com/rss/search?q=%22directed+by%22+%22ad+campaign%22+OR+%22commercial%22+when:7d&hl=en-US&gl=US&ceid=US:en", "categorie": "Publicité"}
+  ]
+}
